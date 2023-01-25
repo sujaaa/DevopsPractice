@@ -1,0 +1,41 @@
+ubuntu@ip-172-31-57-134:~$ cd sujata
+ubuntu@ip-172-31-57-134:~/sujata$ nano demofile.html
+ubuntu@ip-172-31-57-134:~/sujata$ nano dockerfile
+ubuntu@ip-172-31-57-134:~/sujata$ nano dockerfile
+ubuntu@ip-172-31-57-134:~/sujata$ vim  dockerfile
+
+[1]+  Stopped                 vim dockerfile
+ubuntu@ip-172-31-57-134:~/sujata$ vim  dockerfile
+
+[2]+  Stopped                 vim dockerfile
+ubuntu@ip-172-31-57-134:~/sujata$ nano dockerfile
+ubuntu@ip-172-31-57-134:~/sujata$ sudo docker build -t htmldemo -f dockerfile .
+Sending build context to Docker daemon    129kB
+Step 1/6 : FROM ubuntu
+ ---> 6b7dfa7e8fdb
+Step 2/6 : RUN apt-get -y update && apt-get -y install apache2 && apt-get -y install apache2-utils
+ ---> Using cache
+ ---> 0c587f472316
+Step 3/6 : RUN apt clean
+ ---> Using cache
+ ---> 42b28bc8d6ad
+Step 4/6 : COPY demofile.html /var/www/html/
+ ---> Using cache
+ ---> 5851fecb7313
+Step 5/6 : EXPOSE 80
+ ---> Using cache
+ ---> 1291658ffe53
+Step 6/6 : CMD ["apache2ctl","-D","FOREGROUND"]
+ ---> Using cache
+ ---> 08ab3f24b245
+Successfully built 08ab3f24b245
+Successfully tagged htmldemo:latest
+ubuntu@ip-172-31-57-134:~/sujata$ sudo docker run --sujatawebsite -d -p 80:80 htmldemo
+unknown flag: --sujatawebsite
+See 'docker run --help'.
+ubuntu@ip-172-31-57-134:~/sujata$ sudo docker run --name sujatawebsite -d -p 80:80 htmldemo
+542e08137839fc0fa8e0019ec82b43c599e0aea0b155640754f68739eb0f82c3
+ubuntu@ip-172-31-57-134:~/sujata$ sudo docker ps -a
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                               NAMES
+542e08137839   htmldemo   "apache2ctl -D FOREG…"   30 seconds ago   Up 28 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   sujatawebsite
+ubuntu@ip-172-31-57-134:~/sujata$
